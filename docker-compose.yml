@@ -1,8 +1,32 @@
 version: "3.8"
 
 services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: app123
+      MYSQL_DATABASE: restaurant_db
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - restaurant-net
+    ports:
+      - "3306:3306"
+
   app:
     build: .
     container_name: restaurant-container
-    network_mode: host
+    depends_on:
+      - mysql
+    networks:
+      - restaurant-net
+    ports:
+      - "3000:3000"
     restart: always
+
+networks:
+  restaurant-net:
+    driver: bridge
