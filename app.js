@@ -15,61 +15,85 @@ app.get("/", (req, res) => {
   <head>
     <title>Restaurant App</title>
     <style>
-<h1 style="color: red; text-align: center;">
-🔥 Restaurant Recommendation System 🔥
-</h1>
-
-<p style="text-align:center;">
-🚀 Updated LIVE via Jenkins + Docker + ngrok
-</p>
       body {
-        font-family: Arial, sans-serif;
-        background: #eefaf0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #ffe259, #ffa751);
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
       }
-      .card {
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+      .container {
+        background: #ffffffcc; /* white with transparency */
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         text-align: center;
+        max-width: 400px;
+        width: 90%;
       }
+
+      h1 {
+        font-size: 28px;
+        color: #ff5722;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
       input {
-        padding: 10px;
-        width: 200px;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+        padding: 12px;
+        width: 80%;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 14px;
       }
+
       button {
-        padding: 10px 20px;
-        background: #007bff;
+        padding: 12px 25px;
+        background: #ff5722;
         color: white;
+        font-weight: bold;
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
+        transition: 0.3s;
       }
+
       button:hover {
-        background: #0056b3;
+        background: #e64a19;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #888;
       }
     </style>
   </head>
   <body>
-    <div class="card">
-      <h2>🍽️ Restaurant Recommendation</h2>
+    <div class="container">
+      <h1>🍴 Restaurant Finder</h1>
+      <p>Find the best restaurants based on your favorite meal!</p>
       <form action="/recommend">
-        <input name="meal" placeholder="Enter favorite meal" />
+        <input name="meal" placeholder="Enter your favorite meal" />
         <br/>
-        <button type="submit">Recommend</button>
+        <button type="submit">Get Recommendation</button>
       </form>
+      <footer>🚀 Updated LIVE via Jenkins + Docker + ngrok</footer>
     </div>
   </body>
   </html>
   `);
 });
+
 app.get("/recommend", (req, res) => {
   const meal = req.query.meal;
 
@@ -134,6 +158,6 @@ app.get("/recommend", (req, res) => {
     }
   );
 });
-app.listen(3000, () => {
+app.listen(3000,'0.0.0.0', () => {
   console.log("Server running on port 3000");
 });
